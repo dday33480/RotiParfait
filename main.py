@@ -8,16 +8,19 @@ Poids = ''
 Cuisson = ''
 
 
-# Get input from user
-Viande = input('Je cherche la cuisson parfaite pour ') 
 
-print('Veuillez me renseigner le poids de la viande en KG: ' )
+
+# Get input from user
+Viande = input('Je cherche la cuisson parfaite pour ')
+viande_uppercase = Viande.capitalize()
+
+print('Veuillez me renseigner le poids de la viande en KG: ')
 
 Poids = float(input(''))
 
-print(f'Merci, donc nous avons la viande:\n{Viande}')
+print(f'Merci, donc nous avons la viande:\n {viande_uppercase}')
 
-print(f'Pour une cuisson {Cuisson}')
+#print(f'Pour une cuisson {Cuisson}')
 
 print(f'Pour un poids de:\n{Poids}kg')
 
