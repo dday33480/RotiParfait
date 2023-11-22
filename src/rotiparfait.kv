@@ -1,0 +1,50 @@
+#:kivy 2.2.1
+<MeatSelection>:
+    cols:1
+    Label:
+        text: "Rôti Parfait"
+        font_size: 44
+        bold: "true"
+        size_hint:(100, None)
+        pos_hint:{"y":0.5}
+    Label:
+        text: "Quelle viande utilisez vous ?"
+        font_size: 22
+        size_hint:(100, None)
+        pos_hint:{"y":0.25}
+    GridLayout:
+        cols: 4
+        spacing: "5dp"
+        size_hint:(100, None)
+        Button:
+            text: "Poulet"
+            image_source: 'resources/img/chicken.png'
+            on_press: app.on_button_press(1)
+        Button:
+            text: "Boeuf"
+            image_source: 'resources/img/cow.png'
+            on_press: app.on_button_press(2)
+        Button:
+            text: "Agneau"
+            image_source: 'resources/img/lamb.png'
+            on_press: app.on_button_press(3)
+        Button:
+            text: "Porc"
+            image_source: 'resources/img/pig.png'
+            on_press: app.on_button_press(4)
+    GridLayout:
+        cols: 1
+        Button:
+            text: "Suivant"
+            font_size: 38
+            bold: "true"
+
+#<MainWidget>:
+#    Button:
+#        text: "Hello"
+#        size: "100dp", "80dp"
+#        pos: 100, 300
+#    Button:
+#        text: "Hello2"
+#        size: "100dp", "80dp"
+#        pos: 250, 550
