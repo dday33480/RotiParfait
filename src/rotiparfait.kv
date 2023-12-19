@@ -1,43 +1,196 @@
 #:kivy 2.2.1
+WindowManager:
+    MeatSelection:
+        id: meat
+    WeightSelection:
+        id: weight
+    ResultWindow:
+        id: result
+
+
+<Button>:
+    bold: "true"
+    background_color: (0.92, 0.37, 0.13, 1)
+
 <MeatSelection>:
-    cols:1
-    Label:
-        text: "Rôti Parfait"
-        font_size: 44
-        bold: "true"
-        size_hint:(100, None)
-        pos_hint:{"y":0.5}
-    Label:
-        text: "Quelle viande utilisez vous ?"
-        font_size: 22
-        size_hint:(100, None)
-        pos_hint:{"y":0.25}
-    GridLayout:
-        cols: 4
-        spacing: "5dp"
-        size_hint:(100, None)
-        Button:
-            text: "Poulet"
-            image_source: 'resources/img/chicken.png'
-            on_press: app.on_button_press(1)
-        Button:
-            text: "Boeuf"
-            image_source: 'resources/img/cow.png'
-            on_press: app.on_button_press(2)
-        Button:
-            text: "Agneau"
-            image_source: 'resources/img/lamb.png'
-            on_press: app.on_button_press(3)
-        Button:
-            text: "Porc"
-            image_source: 'resources/img/pig.png'
-            on_press: app.on_button_press(4)
-    GridLayout:
-        cols: 1
-        Button:
-            text: "Suivant"
-            font_size: 38
+    name: "meat"
+
+    FloatLayout:
+        Label:
+            text: "Rôti Parfait"
+            font_size: 44
+            font_name: "resources/fonts/RubikDirt-Regular"
             bold: "true"
+            size_hint:(None, None)
+            pos_hint:{"top": 1, "center_x":.5 }
+        Label:
+            text: "Choix de viande"
+            font_size: 26
+            font_name: "resources/fonts/JoesBurger"
+            size_hint:(None, None)
+            pos_hint:{"top": 0.85, "center_x": .5}
+        ToggleButton:
+            id: Chicken
+            text: "Poulet"
+            font_size: 24
+            font_name: "resources/fonts/JoesBurger"
+            size_hint: 0.20, 0.10
+            pos_hint:{"top": 0.70, "x":0.05 }
+            on_state: root.on_toggle_button_state(self)
+            on_press: root.meat_selection()
+        ToggleButton:
+            id: Beef
+            text: "Boeuf"
+            font_size: 24
+            font_name: "resources/fonts/JoesBurger"
+            size_hint: 0.20, 0.10
+            pos_hint:{"top": 0.70, "x":0.28 }
+            on_state: root.on_toggle_button_state(self)
+            on_press: root.meat_selection()
+        ToggleButton:
+            id: Lamb
+            text: "Agneau"
+            font_size: 24
+            font_name: "resources/fonts/JoesBurger"
+            size_hint: 0.20, 0.10
+            pos_hint:{"top": 0.70, "x":0.51 }
+            on_state: root.on_toggle_button_state(self)
+            on_press: root.meat_selection()
+        ToggleButton:
+            id: Pig
+            text: "Porc"
+            font_size: 24
+            font_name: "resources/fonts/JoesBurger"
+            size_hint: 0.20, 0.10
+            pos_hint:{"top": 0.70, "x":0.74 }
+            on_state: root.on_toggle_button_state(self)
+            on_press: root.meat_selection()
+        Button:
+            text: "Suivant >"
+            font_size: 20
+            font_name: "resources/fonts/JoesBurger"
+            size_hint:(None, None)
+            pos_hint:{"top": 0.50, "x":0.20 }
+            size_hint: 0.60, 0.10
+            disabled: not root.btn_down
+            on_release:
+                app.root.current = "weight"
+                root.manager.transition.direction = "left"
+
+<WeightSelection>:
+    name: "weight"
+
+    FloatLayout:
+        Label:
+            text: "Rôti Parfait"
+            font_size: 44
+            font_name: "resources/fonts/RubikDirt-Regular"
+            bold: "true"
+            size_hint:(None, None)
+            pos_hint:{"top": 1, "center_x":.5 }
+        Label:
+            text: "Quel est le poids de votre viande ?"
+            font_size: 26
+            font_name: "resources/fonts/JoesBurger"
+            size_hint:(None, None)
+            pos_hint:{"top": 0.85, "center_x": .5}
+        TextInput:
+            id: kilo
+            text: ""
+            font_size: 22
+            size_hint: 0.07, 0.07
+            pos_hint: {"top": 0.65, "x":0.30}
+            hint_text: "1"
+            multiline: "false"
+        Label:
+            text: "."
+            font_size: 22
+            font_name: "resources/fonts/JoesBurger"
+            size_hint: 0.07, 0.07
+            pos_hint: {"top": 0.65, "x":0.36}            
+        TextInput:
+            id: grammes
+            text: ""
+            font_size: 22
+            size_hint: 0.12, 0.07
+            pos_hint: {"top": 0.65, "x":0.43}
+            hint_text: "200"
+            multiline: "false"
+        Label:
+            text: "Kg"
+            font_size: 22
+            font_name: "resources/fonts/JoesBurger"
+            size_hint: 0.10, 0.10
+            pos_hint: {"top": 0.65, "x":0.55}
+        Button:
+            text: "< Précédent"
+            font_size: 20
+            font_name: "resources/fonts/JoesBurger"
+            pos_hint:{"top": 0.45, "x":0.15 }
+            size_hint: 0.30, 0.10
+            on_release:
+                app.root.current = "meat"
+                root.manager.transition.direction = "right"
+        Button:
+            text: "Suivant >"
+            font_size: 20
+            font_name: "resources/fonts/JoesBurger"
+            pos_hint:{"top": 0.45, "x":0.55 }
+            size_hint: 0.30, 0.10
+            on_press: root.weight_input()
+            on_release:
+                app.root.current = "result"
+                root.manager.transition.direction = "left"
+
+<ResultWindow>:
+    name: "result"
+    defaultText: "0:00"
+
+    FloatLayout:
+        Label:
+            text: "Rôti Parfait"
+            font_size: 44
+            font_name: "resources/fonts/RubikDirt-Regular"
+            bold: "true"
+            size_hint:(None, None)
+            pos_hint:{"top": 1, "x":0.40 }
+        Label:
+            text: "Le temps de cuisson pour votre viande est:"
+            font_size: 26
+            font_name: "resources/fonts/JoesBurger"
+            size_hint:(None, None)
+            pos_hint:{"top": 0.85, "center_x": .5}
+        Label:
+            text: root.cooking_time
+            font_size: 48
+            size_hint:(None, None)
+            pos_hint:{"top": 0.75, "center_x": .5}
+        Button:
+            text: "Calculer"
+            font_size: 20
+            font_name: "resources/fonts/JoesBurger"
+            pos_hint:{"top": 0.58, "center_x":.5 }
+            size_hint: 0.30, 0.10
+            on_press: root.final_result()
+        Button:
+            text: "< Précédent"
+            font_size: 20
+            font_name: "resources/fonts/JoesBurger"
+            pos_hint:{"top": 0.40, "x":0.15 }
+            size_hint: 0.30, 0.10
+            on_release:
+                app.root.current = "weight"
+                root.manager.transition.direction = "right"
+        Button:
+            text: "Terminé"
+            font_size: 20
+            font_name: "resources/fonts/JoesBurger"
+            pos_hint:{"top": 0.40, "x":0.55 }
+            size_hint: 0.30, 0.10
+            on_release:
+                app.root.current = "meat"
+                root.manager.transition.direction = "right"
+
 
 #<MainWidget>:
 #    Button:
